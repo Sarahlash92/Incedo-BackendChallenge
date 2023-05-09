@@ -2,7 +2,7 @@ const fs = require("fs");
 const csvWriter = require("../utils/csv-writer");
 const artistDict = require("../data/artistsDictionary");
 
-// Handles fetching Artists Data
+/* Handles fetching Artists Data */
 
 const collectArtistData = async (artistName) => {
   const URL = `http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=${artistName}&api_key=${process.env.API_KEY}&format=json`;
@@ -11,7 +11,9 @@ const collectArtistData = async (artistName) => {
   const data = await res.json();
   let artistData = data.results.artistmatches.artist;
 
-  // if no artist found, get random artists from dictionary
+  /* if no artist found, 
+  get random artists from dictionary */
+  
   if (artistData.length < 1) {
     while (artistData.length < 4) {
       const randomIndex = Math.floor(
@@ -24,7 +26,8 @@ const collectArtistData = async (artistName) => {
   return artistData;
 };
 
-// Handles getting artists info list from LAST fm
+/* Handles getting artists info 
+list from LAST fm */
 
 exports.getArtistData = async (req, res, next) => {
   const { artistName } = req.params;
@@ -38,7 +41,9 @@ exports.getArtistData = async (req, res, next) => {
   }
 };
 
-// Handles writing artists info list from LAST fm to CSV file
+/* Handles writing artists 
+info list from LAST fm to CSV file */
+
 exports.writeArtistsTofile = async (req, res, next) => {
   const { csvFileName, artistName } = req.params || "defaultArtistsList";
 

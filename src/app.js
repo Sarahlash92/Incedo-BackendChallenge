@@ -1,17 +1,18 @@
 const express = require('express')
 const app = express()
 
-const doteenv = require('dotenv').config()
+const dotenv = require('dotenv').config()
 const PORT = process.env.PORT || 3000
 
-//parsing data 
 app.use(express.json());
 app.use(express.urlencoded());
 
-//setting up routes 
+/*setting up routes */
 const artistSearchRouter = require('./routes/artistSearch')
 
 app.use('/search', artistSearchRouter)
+
+/* Handles invalid routes */
 
 app.use((req, res, next) => {
   if (req.originalUrl !== '/search') {

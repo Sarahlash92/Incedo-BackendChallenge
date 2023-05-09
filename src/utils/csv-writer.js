@@ -1,5 +1,8 @@
 const createCsvWriter = require("csv-writer").createObjectCsvWriter;
 
+/* structures the CSV file 
+by adding headers */ 
+
 exports.writeToFile = async (filePath, records) => {
   const csvWriter = createCsvWriter({
     path: filePath,
