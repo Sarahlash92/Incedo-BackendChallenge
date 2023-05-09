@@ -13,6 +13,13 @@ const artistSearchRouter = require('./routes/artistSearch')
 
 app.use('/search', artistSearchRouter)
 
+app.use((req, res, next) => {
+  if (req.originalUrl !== '/search') {
+    return res.status(404).send('Invalid route');
+  }
+  next();
+});
+
 app.listen(PORT, ()=> {
   console.log(`Running Express Server on Port ${PORT}`);
 })
