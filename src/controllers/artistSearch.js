@@ -1,4 +1,6 @@
+const fs = require("fs");
 const csvWriter = require("../utils/csv-writer");
+const artistDict = require("../data/artistsDictionary");
 
 // Handles fetching Artists Data
 
@@ -7,7 +9,19 @@ const collectArtistData = async (artistName) => {
 
   const res = await fetch(URL);
   const data = await res.json();
-  return data.results.artistmatches.artist;
+  let artistData = data.results.artistmatches.artist;
+
+  // if no artist found, get random artists from dictionary
+  if (artistData.length < 1) {
+    while (artistData.length < 4) {
+      const randomIndex = Math.floor(
+        Math.random() * artistDict.randomArtists.length
+      );
+      const randomArtist = artistDict.randomArtists[randomIndex];
+      artistData.push(randomArtist);
+    }
+  }
+  return artistData;
 };
 
 // Handles getting artists info list from LAST fm
