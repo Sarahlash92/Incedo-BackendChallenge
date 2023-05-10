@@ -4,7 +4,7 @@ Node.js REST API Searches for an artist by name using [artist.search](https://ww
 
 ## Routes and Functionality
 
-For using this REST api I provided the following routes and their functionality;
+For using this REST API I provided the following routes and their functionality;
 
 | Route                                   | Use                                                                        | Function                                                            |
 | --------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------- |
